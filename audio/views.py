@@ -15,17 +15,19 @@ class AudioFileUploadView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.audio = form.cleaned_data['audio']
         return super().form_valid(form)
     
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
             uploaded_file = form.cleaned_data['audio']
-            
+            print(uploaded_file) 
             return self.form_valid(form)  
         else:
             return self.form_invalid(form) 
         
 def index(request):
     audio_upload_form = AudioFileUploadForm()
+    print(audio_upload_form)
     return render(request, 'audio/index.html', {'audio_upload_form': audio_upload_form})

@@ -23,7 +23,7 @@ class User(AbstractUser):
 class AudioFile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     file_name = models.CharField(max_length=255)
-    file_path = models.CharField(max_length=255)
+    audio = models.FileField(upload_to='audio/') 
     upload_date = models.DateTimeField(auto_now_add=True)
     file_format = models.CharField(max_length=10)
 

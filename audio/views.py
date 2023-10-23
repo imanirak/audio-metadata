@@ -6,7 +6,7 @@ from audio.models import AudioFile
 from .forms import AudioFileUploadForm
 from django.utils.decorators import method_decorator
 
-#@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class AudioFileUploadView(CreateView):
     model = AudioFile
     form_class = AudioFileUploadForm
@@ -17,5 +17,15 @@ class AudioFileUploadView(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
     
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            uploaded_file = form.cleaned_data['audio']
+            
+            return self.form_valid(form)  
+        else:
+            return self.form_invalid(form) 
+        
 def index(request):
-    return HttpResponse("Main Dashboard.")
+    audio_upload_form = AudioFileUploadForm()
+    return render(request, 'audio/index.html', {'audio_upload_form': audio_upload_form})

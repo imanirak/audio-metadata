@@ -11,7 +11,6 @@ class AudioFileUploadView(CreateView):
     model = AudioFile
     form_class = AudioFileUploadForm
     template_name = 'audio/audiofile_upload.html'
-    success_url = 'audio/success/'# Redirect to a success page after upload
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -19,6 +18,10 @@ class AudioFileUploadView(CreateView):
         print("Form valid method executed")
         print(self)
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        # Return the URL of the current view
+        return reverse('audiofile_upload')
     
 def success_message(request):
     return render(request, 'audio/success_message.html')

@@ -1,0 +1,15 @@
+<ul>
+    <!-- Iterate over audio_files -->
+    {% for object in audio_files %}
+        <!-- Display Objects -->
+        <li>{{ object.user }}</li>
+        <li>{{ object.audio }}</li>
+        <li>{{ object.file_name }}</li>
+        <li>{{ object.upload_date }}</li>
+        <li>{{ object.file_format }}</li>
+        <hr/>
+    {% empty %}
+        <!-- If audio_files is empty -->
+        <li>No audio files uploaded.</li>
+    {% endfor %}
+</ul>

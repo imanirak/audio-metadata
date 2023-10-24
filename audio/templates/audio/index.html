@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Main Dashboard</title>
-</head>
-<body>
-    <h1>Welcome to the Main Dashboard</h1>
-    
-    <!-- Include the audio file upload form -->
-    {% include 'audio/audiofile_upload.html' %}
-</body>
-</html>
+{% extends "audio/base.html" %}
+
+
+{% block content %}
+    <!-- Your custom content for the index page goes here -->
+ {% include 'audio/audiofile_upload.html' with audio_upload_form=audio_upload_form  %}
+     {% include 'audio/audiofile_list.html' with audio_files=audio_files %}
+    {% endblock %}

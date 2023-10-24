@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Audio Metadata{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="">
+    <!-- Add other CSS and JS links as needed -->
+</head>
+<body>
+    <header>
+        <h1>{% block header %}Welcome to the Main Dashboard{% endblock %}</h1>
+        <!-- Navigation links -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'audiofile_list' %}">List</a></li>
+            </ul>
+        </nav>
+    </header>
+ {% block content %}
+    {% endblock %}
+</body>
+</html>

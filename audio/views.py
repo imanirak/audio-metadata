@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
+from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from audio.models import AudioFile
@@ -16,17 +17,28 @@ class AudioFileUploadView(CreateView):
         form.instance.user = self.request.user
         messages.success(self.request, 'File uploaded successfully.')
         print("Form valid method executed")
-        print(self)
         return super().form_valid(form)
     
     def get_success_url(self):
         # Return the URL of the current view
-        return reverse('audiofile_upload')
+        return reverse('index')
     
 def success_message(request):
     return render(request, 'audio/success_message.html')
 
+@method_decorator(login_required, name='dispatch')
+class AudioFileListView(ListView):
+    model = AudioFile
+    form_class = AudioFileUploadForm
+    template_name = 'audio/audiofile_list.html'
         
 def index(request):
     audio_upload_form = AudioFileUploadForm()
-    return render(request, 'audio/index.html', {'audio_upload_form': audio_upload_form})
+    audio_files = AudioFile.objects.all()
+
+    context = {
+        'audio_files': audio_files,
+        'audio_upload_form' : audio_upload_form
+    }
+
+    return render(request, 'audio/index.html', context)

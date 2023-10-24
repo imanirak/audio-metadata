@@ -1,13 +1,30 @@
 {% if messages %}
-    <ul class="messages">
+    <ul class="bg-blue-200 p-4">
         {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <li{% if message.tags %} class="{{ message.tags }} text-red-500"{% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
 {% endif %}
 
-<form method="post" action="{% url 'audiofile_upload' %}" enctype="multipart/form-data">
+<form class="max-w-sm mx-auto mt-4 bg-gray-400 shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" action="{% url 'audiofile_upload' %}" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ audio_upload_form.as_p }}
-    <button type="submit">Upload</button>
+    
+    <!-- Form input fields -->
+    <div class="mb-4">
+     <label for="{{ audio_upload_form.audio_file.id_for_label }}" class="block text-gray-700 font-bold">Audio File:</label>
+        {{ audio_upload_form.audio }}
+        <label for="{{ audio_upload_form.audio_file.id_for_label }}" class="block text-gray-700 font-bold">File Name:</label>
+        {{ audio_upload_form.file_name }}
+        <label for="{{ audio_upload_form.user.id_for_label }}" class="block text-gray-700 font-bold">User:</label>
+        {{ audio_upload_form.user }}
+           <label for="{{ audio_upload_form.user.id_for_label }}" class="block text-gray-700 font-bold">File Format:</label>
+        {{ audio_upload_form.file_format }}
+    </div>
+
+
+    <!-- Add more fields as needed -->
+
+    <div class="flex items-center justify-between">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Upload</button>
+    </div>
 </form>

@@ -12,11 +12,15 @@
             <ul class="flex space-x-4">
                 <li><a href="{% url 'index' %}" class="text-white hover:text-gray-200">Home</a></li>
                 <li><a href="{% url 'audiofile_list' %}" class="text-white hover:text-gray-200">List</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}" class="text-white hover:text-gray-200">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="text-white hover:text-gray-200">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
     <div class="container mx-auto p-4">
-      <h1 class="text-gray text-2xl font-bold">{% block header %}Welcome to the Main Dashboard{% endblock %}</h1>
         {% block content %}
         {% endblock %}
     </div>

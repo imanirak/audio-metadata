@@ -2,6 +2,7 @@
 
 
 {% block content %}
+   <h1 class="text-gray text-2xl font-bold">{% block header %}Welcome to the Main Dashboard{% endblock %}</h1>
     <!-- Your custom content for the index page goes here -->
  {% include 'audio/audiofile_upload.html' with audio_upload_form=audio_upload_form  %}
      {% include 'audio/audiofile_list.html' with audio_files=audio_files %}

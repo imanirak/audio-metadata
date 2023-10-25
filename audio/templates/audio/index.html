@@ -1,9 +1,19 @@
 {% extends "audio/base.html" %}
 
-
 {% block content %}
-   <h1 class="text-gray text-2xl font-bold">{% block header %}Welcome to the Main Dashboard{% endblock %}</h1>
-    <!-- Your custom content for the index page goes here -->
- {% include 'audio/audiofile_upload.html' with audio_upload_form=audio_upload_form  %}
-     {% include 'audio/audiofile_list.html' with audio_files=audio_files %}
-    {% endblock %}
+   <!-- Your custom content for the index page goes here -->
+   {% if user.is_authenticated %}
+    <h1 class="text-gray text-2xl font-bold">{% block header %}Welcome to the Main Dashboard{% endblock %}</h1>
+
+    <div class="flex flex-row">
+        <div class="w-1/2 pr-4">
+            <!-- Left Column: audiofile_upload.html -->
+            {% include 'audio/audiofile_upload.html' with audio_upload_form=audio_upload_form %}
+        </div>
+        <div class="w-1/2 pl-4">
+            <!-- Right Column: audiofile_list.html -->
+            {% include 'audio/audiofile_list.html' with audio_files=audio_files %}
+        </div>
+    </div>
+   {% endif %}
+{% endblock %}

@@ -16,11 +16,11 @@ class AudioFileUploadView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         messages.success(self.request, 'File uploaded successfully.')
-        print("Form valid method executed")
         return super().form_valid(form)
     
     def get_success_url(self):
         # Return the URL of the current view
+        messages.success(self.request, '')
         return reverse('index')
 
 @method_decorator(login_required, name='dispatch')

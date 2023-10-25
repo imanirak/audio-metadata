@@ -22,9 +22,6 @@ class AudioFileUploadView(CreateView):
     def get_success_url(self):
         # Return the URL of the current view
         return reverse('index')
-    
-def success_message(request):
-    return render(request, 'audio/success_message.html')
 
 @method_decorator(login_required, name='dispatch')
 class AudioFileListView(ListView):

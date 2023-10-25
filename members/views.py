@@ -15,3 +15,9 @@ def login_user(request):
             messages.success(request, ("There was an Error Logging In, Try Again... "))
             redirect('login')
     return render(request, 'authenticate/login.html', {})
+
+def logout_user(request):
+    messages.clear(request)
+    logout(request)
+    messages.success(request, "You have been logged out.")
+    return redirect('index')

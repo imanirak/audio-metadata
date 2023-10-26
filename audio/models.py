@@ -35,14 +35,8 @@ class Metadata(models.Model):
     year = models.IntegerField(null=True, blank=True)
     genre = models.CharField(max_length=50, null=True, blank=True)
     track_number = models.IntegerField(null=True, blank=True)
-    # Add any other common metadata fields
     duration = models.FloatField(null=True, blank=True)
     authors = models.CharField(max_length=255, null=True, blank=True)
-    audio_channels = models.IntegerField(null=True, blank=True)
-    sample_rate = models.FloatField(null=True, blank=True)
     where_from = models.CharField(max_length=255, null=True, blank=True)
-    musical_genre = models.CharField(max_length=50, null=True, blank=True)
-    year_recorded = models.IntegerField(null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
-    # Add a JSONField for custom metadata
-    custom_metadata = models.JSONField(null=True, blank=True)
+

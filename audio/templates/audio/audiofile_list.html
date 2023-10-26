@@ -30,7 +30,8 @@
             <span class="font-bold text-blue-600">Year Recorded:</span> {{ audio_file.metadata.year_recorded }}<br>
             <span class="font-bold text-blue-600">Comment:</span> {{ audio_file.metadata.comment }}<br>
             
-            <!-- Add a link to view the metadata for this audio file -->
+            <!-- Add a link to view the audio file metadata -->
+           
             <a href="{% url 'audiofile_metadata' audio_file.id %}">View Metadata</a>
         </li>
         <hr class="border-gray-300">

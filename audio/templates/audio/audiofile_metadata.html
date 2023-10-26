@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio File Metadata</title>
+</head>
+<body>
+    <h1>Audio File Metadata</h1>
+    
+    <h2>Audio File Details</h2>
+    <ul>
+        <li><strong>User:</strong> {{ audio_file.user }}</li>
+        <li><strong>Audio:</strong> {{ audio_file.audio }}</li>
+        <li><strong>File Name:</strong> {{ audio_file.file_name }}</li>
+        <li><strong>Upload Date:</strong> {{ audio_file.upload_date }}</li>
+        <li><strong>File Format:</strong> {{ audio_file.file_format }}</li>
+        <!-- Add any other details you want to display -->
+    </ul>
+
+    <h2>Metadata</h2>
+    <ul>
+        <li><strong>Title:</strong> {{ title }}</li>
+        <li><strong>Artist:</strong> {{ artist }}</li>
+        <li><strong>Album:</strong> {{ album }}</li>
+        <li><strong>Duration:</strong> {{ duration }} seconds</li>
+        <li><strong>Genre:</strong> {{ genre }}</li>
+        <li><strong>Track Number:</strong> {{ track_number }}</li>
+        <!-- Add any other metadata fields you want to display -->
+    </ul>
+
+    <p><a href="{% url 'audiofile_list' %}">Back to Audio Files List</a></p>
+</body>
+</html>

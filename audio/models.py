@@ -40,7 +40,6 @@ class Metadata(models.Model):
     track_number = models.IntegerField(null=True, blank=True)
     duration = models.FloatField(null=True, blank=True)
     authors = models.CharField(max_length=255, null=True, blank=True)
-    where_from = models.CharField(max_length=255, null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
         
     def __str__(self):

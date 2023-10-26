@@ -10,7 +10,7 @@ from django.contrib import messages
 from mutagen import File
 from mutagen.mp3 import MP3
 from mutagen.flac import FLAC
-
+from datetime import datetime
 
 def get_audio_metadata(request, audio_file_id):
     audio_file = AudioFile.objects.get(id=audio_file_id)
@@ -22,13 +22,14 @@ def get_audio_metadata(request, audio_file_id):
     # Access metadata tags
     title = audio.get('TIT2', ['Unknown Title'])[0]
     artist = audio.get('TPE1', ['Unknown Artist'])[0]
-    comment = audio.get('COMM', [''])[0]
+    comment = audio.get('COMM::eng', [''])[0]
     genre = audio.get('TCON', ['Unknown Genre'])[0]
     duration = audio.info.length
     track_number = audio.get('TRCK', ['Unknown Track'])[0]
     album = audio.get('album', '')
-    year = audio.get('year', 0)
-    where_from = audio.get('where_from', '')
+    year_tag = audio.get('TDRC', [''])[0]
+    year = str(year_tag)
+
 
     metadata = {
         'title': title,
@@ -39,7 +40,6 @@ def get_audio_metadata(request, audio_file_id):
         'duration': duration,
         'track_number': track_number,
         'comment': comment,
-        'where_from': where_from,
     }
 
     return metadata
@@ -48,19 +48,16 @@ def view_audio_metadata(request, audio_file_id):
     audio_file = AudioFile.objects.get(id=audio_file_id)
     audio_file_path = audio_file.audio.path
 
-    # Load the audio file using Mutagen
     audio = File(audio_file_path)
-
-    # Access metadata tags
     title = audio.get('TIT2', ['Unknown Title'])[0]
     artist = audio.get('TPE1', ['Unknown Artist'])[0]
-    comment = audio.get('COMM', [''])[0]
+    comment = audio.get('COMM::eng', [''])[0]
     genre = audio.get('TCON', ['Unknown Genre'])[0]
     duration = audio.info.length
     track_number = audio.get('TRCK', ['Unknown Track'])[0]
     album = audio.get('album', '')
-    year = audio.get('year', 0)
-    where_from = audio.get('where_from', '')
+    year_tag = audio.get('TDRC', [''])[0]
+    year = str(year_tag)
 
 
     return render(request, 'audio/audiofile_metadata.html', {
@@ -72,8 +69,7 @@ def view_audio_metadata(request, audio_file_id):
         'genre': genre,
         'track_number': track_number,
         'comment': comment,
-        'year': year,
-        'where_from': where_from
+        'year': year
     })
 
 @method_decorator(login_required, name='dispatch')
@@ -102,7 +98,6 @@ class AudioFileUploadView(CreateView):
             duration=metadata['duration'],
             track_number=metadata['track_number'],
             comment=metadata['comment'],
-            where_from=metadata['where_from']
             
         )
         metadata_instance.save()

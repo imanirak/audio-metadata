@@ -1,13 +1,38 @@
 <ul class="border-t border-b border-gray-300">
     <!-- Iterate over audio_files -->
-    {% for object in audio_files %}
-        <!-- Display Objects -->
+    {% for audio_file in audio_files %}
+        <!-- Display Audio File Details -->
         <li class="p-4 border-t border-gray-300">
-            <span class="font-bold text-blue-600">User:</span> {{ object.user }}<br>
-            <span class="font-bold text-blue-600">Audio:</span> {{ object.audio }}<br>
-            <span class="font-bold text-blue-600">File Name:</span> {{ object.file_name }}<br>
-            <span class="font-bold text-blue-600">Upload Date:</span> {{ object.upload_date }}<br>
-            <span class="font-bold text-blue-600">File Format:</span> {{ object.file_format }}
+            <span class="font-bold text-blue-600">User:</span> {{ audio_file.user }}<br>
+            <span class="font-bold text-blue-600">Audio:</span> {{ audio_file.audio }}<br>
+            <span class="font-bold text-blue-600">File Name:</span> {{ audio_file.file_name }}<br>
+            <span class="font-bold text-blue-600">Upload Date:</span> {{ audio_file.upload_date }}<br>
+            <span class="font-bold text-blue-600">File Format:</span> {{ audio_file.file_format }}
+        </li>
+        <hr class="border-gray-300">
+        
+        <!-- Display Metadata Details -->
+        <li class="p-4 border-t border-gray-300">
+            <span class="font-bold text-blue-600">Title:</span> {{ audio_file.metadata.title }}<br>
+            <span class="font-bold text-blue-600">Artist:</span> {{ audio_file.metadata.artist }}<br>
+            <span class="font-bold text-blue-600">Album:</span> {{ audio_file.metadata.album }}<br>
+            <span class="font-bold text-blue-600">Year:</span> {{ audio_file.metadata.year }}<br>
+            <span class="font-bold text-blue-600">Genre:</span> {{ audio_file.metadata.genre }}<br>
+            <span class="font-bold text-blue-600">Track Number:</span> {{ audio_file.metadata.track_number }}<br>
+            
+            <!-- Add the new metadata fields here -->
+            <span class="font-bold text-blue-600">Duration:</span> {{ audio_file.metadata.duration }}<br>
+            <span class="font-bold text-blue-600">Authors:</span> {{ audio_file.metadata.authors }}<br>
+            <span class="font-bold text-blue-600">Audio Channels:</span> {{ audio_file.metadata.audio_channels }}<br>
+            <span class="font-bold text-blue-600">Sample Rate:</span> {{ audio_file.metadata.sample_rate }}<br>
+            <span class="font-bold text-blue-600">Where From:</span> {{ audio_file.metadata.where_from }}<br>
+            <span class="font-bold text-blue-600">Musical Genre:</span> {{ audio_file.metadata.musical_genre }}<br>
+            <span class="font-bold text-blue-600">Year Recorded:</span> {{ audio_file.metadata.year_recorded }}<br>
+            <span class="font-bold text-blue-600">Comment:</span> {{ audio_file.metadata.comment }}<br>
+            
+            <!-- Add a link to view the audio file metadata -->
+           
+            <a href="{% url 'audiofile_metadata' audio_file.id %}">View Metadata</a>
         </li>
         <hr class="border-gray-300">
     {% empty %}

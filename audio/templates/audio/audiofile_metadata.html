@@ -1,0 +1,36 @@
+{% extends "audio/base.html" %}
+
+{% block title %}Audio File Metadata{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-semibold text-blue-600 mb-4">Audio File Metadata</h1>
+
+    <div class="bg-white rounded-lg shadow p-4 mb-4">
+        <h2 class="text-xl font-semibold text-blue-600 mb-2">Audio File Details</h2>
+        <ul>
+            <li class="mb-2"><strong>User:</strong> {{ audio_file.user }}</li>
+            <li class="mb-2"><strong>Audio:</strong> {{ audio_file.audio }}</li>
+            <li class="mb-2"><strong>File Name:</strong> {{ audio_file.file_name }}</li>
+            <li class="mb-2"><strong>Upload Date:</strong> {{ audio_file.upload_date }}</li>
+            <li class="mb-2"><strong>File Format:</strong> {{ audio_file.file_format }}</li>
+            <!-- Add any other details you want to display -->
+        </ul>
+    </div>
+
+    <div class="bg-white rounded-lg shadow p-4">
+        <h2 class="text-xl font-semibold text-blue-600 mb-2">Metadata</h2>
+        <ul>
+            <li class="mb-2"><strong>Title:</strong> {{ title }}</li>
+            <li class="mb-2"><strong>Artist:</strong> {{ artist }}</li>
+            <li class="mb-2"><strong>Album:</strong> {{ album }}</li>
+            <li class="mb-2"><strong>Duration:</strong> {{ duration }} seconds</li>
+            <li class="mb-2"><strong>Genre:</strong> {{ genre }}</li>
+            <li class="mb-2"><strong>Track Number:</strong> {{ track_number }}</li>
+            <!-- Add any other metadata fields you want to display -->
+        </ul>
+    </div>
+
+    <p class="mt-4"><a class="text-blue-600 hover:underline" href="{% url 'audiofile_list' %}">Back to Audio Files List</a></p>
+</div>
+{% endblock %}
